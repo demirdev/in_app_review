@@ -69,7 +69,7 @@ public class InAppReviewPlugin implements FlutterPlugin, MethodCallHandler, Acti
                 requestReview(result);
                 break;
             case "openStoreListing":
-                openStoreListing(result);
+                openStoreListing(result, call.arguments.toString());
                 break;
             default:
                 result.notImplemented();
@@ -230,7 +230,7 @@ public class InAppReviewPlugin implements FlutterPlugin, MethodCallHandler, Acti
     }
 
 
-    private void openStoreListing(Result result) {
+    private void openStoreListing(Result result, String customPackageName) {
         Log.i(TAG, "openStoreListing: called");
         if (noContextOrActivity(result)) return;
 
@@ -238,7 +238,7 @@ public class InAppReviewPlugin implements FlutterPlugin, MethodCallHandler, Acti
         final String packageName = context.getPackageName();
 
         final Intent intent = new Intent(Intent.ACTION_VIEW,
-                Uri.parse("https://play.google.com/store/apps/details?id=" + packageName)
+                Uri.parse("https://play.google.com/store/apps/details?id=" + (customPackageName != null ? customPackageName : packageName ))
         );
 
         activity.startActivity(intent);

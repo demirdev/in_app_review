@@ -63,6 +63,9 @@ abstract class InAppReviewPlatform extends PlatformInterface {
     /// Required for iOS & MacOS.
     String? appStoreId,
 
+    /// Optional for Google Play.
+    String? googlePlayPackageId,
+
     /// Required for Windows.
     String? microsoftStoreId,
   }) {

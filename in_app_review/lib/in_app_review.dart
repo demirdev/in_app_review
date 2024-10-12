@@ -40,11 +40,15 @@ class InAppReview {
     /// Required for iOS & MacOS.
     String? appStoreId,
 
+    /// Optional Google Play Package Id
+    String? googlePlayPackageId,
+
     /// Required for Windows.
     String? microsoftStoreId,
   }) =>
       InAppReviewPlatform.instance.openStoreListing(
         appStoreId: appStoreId,
+        googlePlayPackageId: googlePlayPackageId,
         microsoftStoreId: microsoftStoreId,
       );
 }
