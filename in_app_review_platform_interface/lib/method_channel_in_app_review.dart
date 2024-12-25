@@ -33,6 +33,7 @@ class MethodChannelInAppReview extends InAppReviewPlatform {
   Future<void> openStoreListing({
     String? appStoreId,
     String? microsoftStoreId,
+    String? googlePlayPackageId,
   }) async {
     final bool isiOS = _platform.isIOS;
     final bool isMacOS = _platform.isMacOS;
@@ -45,7 +46,13 @@ class MethodChannelInAppReview extends InAppReviewPlatform {
         ArgumentError.checkNotNull(appStoreId, 'appStoreId'),
       );
     } else if (isAndroid) {
-      await _channel.invokeMethod('openStoreListing');
+      if (googlePlayPackageId != null) {
+        await _launchUrl(
+          'market://details?id=$googlePlayPackageId',
+        );
+      } else {
+        await _channel.invokeMethod('openStoreListing');
+      }
     } else if (isWindows) {
       ArgumentError.checkNotNull(microsoftStoreId, 'microsoftStoreId');
       await _launchUrl(
